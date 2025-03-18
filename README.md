@@ -56,7 +56,7 @@ train_data = TensorDataset(train_inputs, train_masks, train_labels)
 train_sample = RandomSampler(train_data)
 train_dataloader = DataLoader(train_data, sampler=train_sample, batch_size=batch_size)
 
-#검증용 데이터로더 구현
+# 검증용 데이터로더 구현
 validation_input = torch.tensor(validation)
 validation_labels = torch.tensor(validation_y)
 validation_masks = torch.tensor(validation_mask)
@@ -77,7 +77,7 @@ scheduler = get_linear_schedule_with_warmup(optimizer,
 epoch_results = []
 
 for e in range(epochs):
-    #학습 루프
+# 학습 루프
     model.train()
     total_train_loss = 0
 
@@ -91,12 +91,12 @@ for e in range(epochs):
 
         model.zero_grad()
 
-        # 앞먹임 : forward pass
+ # 앞먹임 : forward pass
         output = model(batch_ids, attention_mask=batch_mask, labels= batch_labels)
         loss = output.loss
         total_train_loss += loss.item()
 
-        #역전파 : backward pass
+# 역전파 : backward pass
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         optimizer.step()
@@ -104,10 +104,10 @@ for e in range(epochs):
 
         progress_bar.set_postfix({'loss': loss.item()})
 
-    #학습 데이터셋에 대한 평균 손실값 계산
+# 학습 데이터셋에 대한 평균 손실값 계산
     avg_train_loss = total_train_loss / len(train_dataloader)
 
-    # 학습데이터셋에 대한 정확도(accuracy) 계산
+ # 학습데이터셋에 대한 정확도(accuracy) 계산
     model.eval()
     train_pred = []
     train_true = []
@@ -128,7 +128,7 @@ for e in range(epochs):
 
     train_accuracy = np.sum(np.array(train_pred) == np.array(train_true)) / len(train_pred)
 
-    # 검증 데이터셋에 대한 정확도(accuracy) 계산
+# 검증 데이터셋에 대한 정확도(accuracy) 계산
     val_pred = []
     val_true = []
     for batch in tqdm(validation_dataloader, desc=f"Evaluation Validation Epoch {e+1}", leave=True):
