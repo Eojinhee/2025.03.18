@@ -158,3 +158,9 @@ print("\n### 모델 저장 ###")
 save_path = "mobilebert_custom_model_imdb"
 model.save_pretrained(save_path + '.pt')
 print("모델 저장 완료")
+
+# 결과 
+
+![스크린샷 2025-03-18 160026](https://github.com/user-attachments/assets/805721ac-7f38-4b2a-a140-d24ac2002deb)
+
+
