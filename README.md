@@ -1,5 +1,7 @@
 # 2025.03.18
-캡스톤 프로젝트
+# 캡스톤 프로젝트
+
+
 import torch
 import pandas as pd
 import numpy as np
